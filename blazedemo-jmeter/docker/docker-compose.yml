@@ -1,0 +1,19 @@
+services:
+  jmeter:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    container_name: blazedemo-jmeter
+    volumes:
+      - ../results:/results
+      - ../reports:/reports
+  reports:
+    image: nginx:alpine
+    container_name: blazedemo-jmeter-reports
+    depends_on:
+      - jmeter
+    volumes:
+      - ../reports:/usr/share/nginx/html/reports:ro
+    ports:
+      - "8080:80"
+    restart: unless-stopped
