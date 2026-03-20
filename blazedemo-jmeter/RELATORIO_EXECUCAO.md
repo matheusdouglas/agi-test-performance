@@ -27,6 +27,9 @@
 - p99: 10.109,0 ms
 - Throughput total: 204,60 req/s
 
+<img width="1914" height="981" alt="image" src="https://github.com/user-attachments/assets/b2a47b62-cd9d-4ec6-b53e-c782cf86736e" />
+
+
 ## Principais Métricas por Ação
 
 - GET / (Home): erro 0,28%, média ~701 ms
@@ -35,10 +38,16 @@
 - POST /purchase.php (Confirmar compra): erro 100% (asserção)
 - Grupo Spike (1 min): ações equivalentes com 0% erro nas amostras observadas
 
+<img width="1622" height="676" alt="image" src="https://github.com/user-attachments/assets/fc295b0b-9728-4438-90ab-9b68954e7ec7" />
+
+
 ## Erros Mais Frequentes
 
 - Test failed: text expected to contain “Thank you for your purchase today!”: 98,76% dos erros
 - 429 Too Many Requests: 1,24% dos erros
+
+<img width="1672" height="305" alt="image" src="https://github.com/user-attachments/assets/ec9d4ac6-8fb8-40d4-a7d7-2717ab7ed668" />
+
 
 Interpretação:
 
@@ -57,19 +66,3 @@ Conclusão: critério não atendido na execução atual (p90 > 2s e throughput a
 - Falha de asserção na etapa de confirmação de compra no fluxo de carga.
 - Respostas 429 (Rate Limiting) durante alta vazão.
 
-## Ações Sugeridas
-
-- Ajustar/relaxar a asserção de sucesso para tolerar variações de conteúdo (ex.: procurar por “Thank you” ou validar presença de ID de compra).
-- Validar parâmetros do POST de compra e dependência de cookies/sessão (Cookie Manager já adicionado).
-- Executar cenários separadamente (Carga e Pico) e gerar relatórios independentes para isolar métricas.
-- Considerar redução progressiva de threads no arranque inicial para evitar burst que induza 429, mantendo o Throughput Timer em 250 RPS.
-- Reexecutar em janelas de menor variação de rede ou com recursos de máquina mais altos.
-
-## Como Anexar
-
-- Compactar `reports/` → `reports-blazedemo.zip`.
-- Anexar `results/results.jtl` e, se desejado, `docker compose logs jmeter` como evidência de execução.
-
-## Reproduzir Rápido (Smoke)
-
-- Reduzir `ThreadGroup.duration` para ~60–120s, manter o Throughput Timer e executar pelo Docker/CLI para gerar um relatório rápido e validar ajustes.
