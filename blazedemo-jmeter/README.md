@@ -50,7 +50,7 @@ docker compose -f docker/docker-compose.yml up --build
 - Carga: 250 RPS por 9 minutos (ramp-up 60s).
 - Pico: 250 RPS com ramp-up de 5s por 60s (spike).
 
-## 🔁 Fluxo de Teste (Plano)
+## Fluxo de Teste (Plano)
 
 1. GET / (Home)
 2. POST /reserve.php (fromPort=Paris, toPort=Berlin)
@@ -61,16 +61,16 @@ docker compose -f docker/docker-compose.yml up --build
 
 Observação: O endpoint de confirmação no BlazeDemo válido é o POST em /purchase.php.
 
-## 🧪 CI (GitHub Actions)
+## CI (GitHub Actions)
 
 - Em cada push/manual, o workflow executa o plano e publica o artefato HTML em “jmeter-reports”.
 
-## ⚙️ Requisitos
+## Requisitos
 
 - Docker Desktop instalado para execução local.
 - Acesso à internet para https://blazedemo.com.
 
-## ❗Notas
+## Notas
 
 - 250 RPS reais dependem de latência de rede e recursos; o timer mantém a taxa alvo.
 - Ajuste threads / throughput conforme seu hardware e rede.
